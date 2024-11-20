@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stored Data</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .container { margin: 50px auto; max-width: 600px; padding: 20px; background: white; }
+        .data-item { margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stored Login Data</h1>
+        <div id="data-container">Loading...</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataContainer = document.getElementById('data-container');
+            const loginData = JSON.parse(localStorage.getItem('loginData')) || [];
+
+            if (loginData.length === 0) {
+                dataContainer.innerHTML = '<p>No data available.</p>';
+            } else {
+                loginData.forEach(item => {
+                    const dataItem = document.createElement('div');
+                    dataItem.classList.add('data-item');
+                    dataItem.innerHTML = `<span>Username: ${item.username}</span><br><span>Password: ${item.password}</span>`;
+                    dataContainer.appendChild(dataItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

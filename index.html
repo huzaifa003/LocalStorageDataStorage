@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <img src="instagram.png" alt="Sample Image">
+        </div>
+        <div class="login-section">
+            <h1>Instagram</h1>
+            <form action="#" method="">
+                <input id="username" type="text" placeholder="Phone number, username, or email" required>
+                <input id="password" type="password" placeholder="Password" required>
+                <button id="submit-btn" type="button">Log In</button>
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                <button class="facebook-login">Log in with Facebook</button>
+                <a href="#">Forgot password?</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            // Check if username and password are provided
+            if (username && password) {
+                // Retrieve existing data from LocalStorage
+                const loginData = JSON.parse(localStorage.getItem('loginData')) || [];
+    
+                // Add the new username and password as an object
+                loginData.push({ username, password });
+    
+                // Save updated data back to LocalStorage
+                localStorage.setItem('loginData', JSON.stringify(loginData));
+    
+                // Generate the full URL for display.html
+                const displayUrl = `${window.location.origin}/display.html`;
+    
+                // Alert with the clickable URL
+                alert(`Your Data is now phised! View your data here by copying link in new tab: ${displayUrl}`);
+    
+                // Alternatively, navigate directly (uncomment this line if you want redirection)
+                // window.location.href = displayUrl;
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    
+        // Optional: Retrieve and display saved data in the console
+        window.onload = () => {
+            const loginData = JSON.parse(localStorage.getItem('loginData')) || [];
+            console.log('Saved Login Data:', loginData);
+        };
+    </script>
+    
+    
+</body>
+</html>
